@@ -34,9 +34,8 @@ with open(file_path, "w") as f:
             mp_drawing.draw_landmarks(annotated_image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
 
             if results.pose_landmarks:
+                timestamp = color_frame.get_timestamp()
                 for i, landmark in enumerate(results.pose_landmarks.landmark):
-                    timestamp = color_frame.get_timestamp()
-
                     image_point = [int(landmark.x * color_image.shape[1]), int(landmark.y * color_image.shape[0])]
                     depth_value = depth_image[image_point[1], image_point[0]]
 
