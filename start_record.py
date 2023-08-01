@@ -2,6 +2,7 @@
 import pyrealsense2 as rs
 import numpy as np
 import cv2
+import time
 
 file_path = "record_data.bag"
 pipeline = rs.pipeline()
@@ -13,6 +14,7 @@ config.enable_all_streams()
 pipeline.start(config)
 
 try:
+    print(time.time())
     while True:
         frames = pipeline.wait_for_frames()
 

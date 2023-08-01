@@ -18,8 +18,6 @@ pose = mp_pose.Pose()
 
 mp_drawing = mp.solutions.drawing_utils 
 
-start_time = time.time()
-
 with open(file_path, "w") as f:
     try:
         while True:
@@ -37,12 +35,13 @@ with open(file_path, "w") as f:
 
             if results.pose_landmarks:
                 for i, landmark in enumerate(results.pose_landmarks.landmark):
-                    elapsed_time = time.time() - start_time
+                    timestamp = color_frame.get_timestamp()
 
                     image_point = [int(landmark.x * color_image.shape[1]), int(landmark.y * color_image.shape[0])]
                     depth_value = depth_image[image_point[1], image_point[0]]
 
-                    f.write(f"{elapsed_time}, {i}, {landmark.x}, {landmark.y}, {depth_value}\n")
+                    f.write(f"{timestamp}, {i}, {landmark.x}, {landmark.y}, {depth_value}\n")
+                    # timestamp -> mili second
 
             # cv2.imshow('RGB Image', annotated_image)
             # cv2.imshow('Depth Image', depth_image)
