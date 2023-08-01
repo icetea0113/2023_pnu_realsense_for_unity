@@ -37,6 +37,10 @@ with open(file_path, "w") as f:
                 timestamp = color_frame.get_timestamp()
                 for i, landmark in enumerate(results.pose_landmarks.landmark):
                     image_point = [int(landmark.x * color_image.shape[1]), int(landmark.y * color_image.shape[0])]
+                    timestamp = color_frame.get_timestamp()
+
+                    image_point = [int(landmark.x * depth_image.shape[1]), int(landmark.y * depth_image.shape[0])]
+
                     depth_value = depth_image[image_point[1], image_point[0]]
 
                     f.write(f"{timestamp}, {i}, {landmark.x}, {landmark.y}, {depth_value}\n")
@@ -45,7 +49,7 @@ with open(file_path, "w") as f:
             # cv2.imshow('RGB Image', annotated_image)
             # cv2.imshow('Depth Image', depth_image)
 
-    except rs.error as err:
+    except RuntimeError as err:
         if err.domain == rs.error_domain.camera_disconnected and err.code == rs.camera_disconnected_error.value:
             print("Reached end of the .bag file!")
         else:
