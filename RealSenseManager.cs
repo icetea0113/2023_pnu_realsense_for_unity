@@ -6,6 +6,7 @@ public class RealSenseManager
 {   
     public event Action<string> ErrorOccurred;
     private string recordScript = "start_record.py";
+    private string processScript = "extract_data.py";
     float StartTime;
     float EndTime;
 
@@ -47,6 +48,7 @@ public class RealSenseManager
             currentProcess?.Kill();
             currentProcess = null;
         }
+        RunPythonScript(processScript);
     }
 
     private Process RunPythonScript(string scriptPath)
