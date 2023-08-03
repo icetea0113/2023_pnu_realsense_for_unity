@@ -8,7 +8,7 @@ file_path = "record_data.bag"
 pipeline = rs.pipeline()
 config = rs.config()
 
-width, height = 1280, 720
+width, height = 640, 480
 config.enable_record_to_file(file_path)
 config.enable_stream(rs.stream.depth, width, height, rs.format.z16, 30)
 config.enable_stream(rs.stream.color, width, height, rs.format.bgr8, 30)
@@ -27,3 +27,5 @@ finally:
 
     # Stop streaming
     pipeline.stop()
+
+#fps도 저장해볼 것.
