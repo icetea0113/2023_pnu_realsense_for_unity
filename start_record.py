@@ -14,12 +14,13 @@ config.enable_stream(rs.stream.depth, width, height, rs.format.z16, 30)
 config.enable_stream(rs.stream.color, width, height, rs.format.bgr8, 30)
 
 pipeline.start(config)
-
+now_time = 0
 try:
-    print(time.time())
+    now_time = time.time()
+    print(now_time)
     while True:
         frames = pipeline.wait_for_frames()
-
+    
 except Exception as e:
     print(f"An error occurred: {e}")
 
